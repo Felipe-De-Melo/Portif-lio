@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversão de Unidades</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Substitua 'styles.css' pelo nome do seu arquivo CSS -->
+    <script>
+        async function convert(endpoint, param, value) {
+            const response = await fetch(`${endpoint}?${param}=${value}`);
+            const result = await response.json();
+            document.getElementById('result').innerText = JSON.stringify(result, null, 2);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Conversão de Unidades</h1>
+
+        <div>
+            <h2>Temperatura</h2>
+            <label for="celsius">Celsius:</label>
+            <input type="number" id="celsius" name="celsius">
+            <button onclick="convert('/convert/celsius-to-fahrenheit', 'celsius', document.getElementById('celsius').value)">Celsius para Fahrenheit</button>
+            <button onclick="convert('/convert/celsius-to-kelvin', 'celsius', document.getElementById('celsius').value)">Celsius para Kelvin</button>
+        </div>
+
+        <div>
+            <h2>Câmbio</h2>
+            <label for="usd">Dólares (USD):</label>
+            <input type="number" id="usd" name="usd">
+            <button onclick="convert('/convert/usd-to-brl', 'usd', document.getElementById('usd').value)">USD para BRL</button>
+
+            <label for="eur">Euros (EUR):</label>
+            <input type="number" id="eur" name="eur">
+            <button onclick="convert('/convert/eur-to-brl', 'eur', document.getElementById('eur').value)">EUR para BRL</button>
+        </div>
+
+        <h2>Resultado</h2>
+        <pre id="result"></pre>
+    </div>
+</body>
+</html>
